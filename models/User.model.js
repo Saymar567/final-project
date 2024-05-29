@@ -21,6 +21,19 @@ const userSchema = new Schema(
     location: {
       type: String,
       required: [true, "Location is required"],
+    },
+    rank: {
+      type: Number,
+      default: 1000
+    },
+    phoneNumber: {
+      type: Number,
+    },
+    description: {
+      type: String,
+    },
+    image: {
+      type: String
     }
   },
   {
