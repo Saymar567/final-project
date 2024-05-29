@@ -14,7 +14,7 @@ const User = require("../models/User.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware.js");
 
 // How many rounds should bcrypt run the salt (default - 10 rounds)
-const saltRounds = 12;
+const saltRounds = 10;
 
 // POST /auth/signup  - Creates a new user in the database
 router.post("/signup", (req, res, next) => {
