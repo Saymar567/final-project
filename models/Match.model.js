@@ -5,7 +5,8 @@ const matchSchema = new Schema ({
     location: {type: mongoose.Schema.Types.ObjectId, ref: "Location", required: true},
     day: {type: String, required: true},
     time: {type: Number, required: true},
-    comment: {type: String, required: true}
+    comment: {type: String, required: true},
+    rival: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }
 });
 const Match= model("Match", matchSchema)
 
