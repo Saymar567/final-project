@@ -20,6 +20,8 @@ router.delete("/:eventId", (req, res)=>{
     .catch((error)=>res.json(error))
 })
 
+//In the routes where we update (PUT) if we want it to return the updated object, not the old one, we need to add another argument, the "new" thing, which gives us he NEW one in the response, not the old one.
+
 router.put("/:eventId", (req, res)=>{
     const {eventId} = req.params
     Event.findByIdAndUpdate(eventId, req.body, {new: true})
