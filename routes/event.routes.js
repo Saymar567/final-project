@@ -7,5 +7,10 @@ router.get("/", (req, res)=>{
     .then((data)=>res.json(data))
     .catch((error)=>res.json(error))
 })
+router.post("/", (req, res)=>{
+    Event.create(req.body)
+    .then((data)=>res.json(data))
+    .catch((error)=>res.json(error))
+})
 
 module.exports = router

@@ -4,7 +4,7 @@ const {Schema,  model} = mongoose
 const eventSchema = new Schema ({
     name: {type: String},
     date: {type: String},
-    location: {type: String},
+    location: {type: mongoose.Schema.Types.ObjectId, ref: "Location"},
     level: {type: String, default: "amateur"},
     prize: {type: String, required: function(){return this.level === "pro"}}
 })
