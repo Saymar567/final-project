@@ -22,7 +22,7 @@ router.delete("/:eventId", (req, res)=>{
 
 router.put("/:eventId", (req, res)=>{
     const {eventId} = req.params
-    Event.findByIdAndUpdate(eventId)
+    Event.findByIdAndUpdate(eventId, req.body, {new: true})
     .then((data)=>res.json(data))
     .catch((error)=>res.json(error))
 })
