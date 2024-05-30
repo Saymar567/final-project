@@ -13,4 +13,18 @@ router.post("/", (req, res)=>{
     .catch((error)=>res.json(error))
 })
 
+router.delete("/:eventId", (req, res)=>{
+    const {eventId} = req.params
+    Event.findByIdAndDelete(eventId)
+    .then((data)=>res.json(data))
+    .catch((error)=>res.json(error))
+})
+
+router.put("/:eventId", (req, res)=>{
+    const {eventId} = req.params
+    Event.findByIdAndUpdate(eventId)
+    .then((data)=>res.json(data))
+    .catch((error)=>res.json(error))
+})
+
 module.exports = router
