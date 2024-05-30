@@ -6,7 +6,9 @@ const matchSchema = new Schema ({
     day: {type: String, required: true},
     time: {type: Number, required: true},
     comment: {type: String, required: true},
-    rival: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }
+    rival: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+    pairs: {type: Boolean, default: false}
+    
 });
 const Match= model("Match", matchSchema)
 

@@ -15,6 +15,7 @@ router.post("/", (req, res) => {
 router.get("/", (req, res) => {
     const { matchId } = req.params;
     Match.find()
+        .populate({ path: "rival", select: "name" })
         .then((data) => res.json({ data }))
         .catch((error) => res.status(400).json({ message: "Error retrieving matches", error }))
 
