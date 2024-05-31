@@ -20,9 +20,12 @@ morgansito.put("/:userId", (req, res)=>{
 })
 
 morgansito.get("/:userId", (req, res)=>{ 
-    const {mail, name, location, rank, phoneNumber, description, image} = req.body
-    User.find(req.body)
-    .then((data)=>res.json(data))
+    const {userId} = req.params
+    User.findById(userId)
+    .then((data)=>{
+        const {mail, name, location, rank, phoneNumber, description, image} = data
+        res.json({mail, name, location, rank, phoneNumber, description, image})
+    })
     .catch((error)=>res.json(error))
 })
 
