@@ -16,6 +16,13 @@ morgansito.put("/:userId", (req, res)=>{
     const {name, location, phoneNumber, description, image} = req.body;
     User.findByIdAndUpdate(userId, req.body, {new: true})
     .then((data)=>res.status(200).json("Changes were made in your profile!", data))
+    .catch((error)=>res.json("Arnaldo esto no funciona, polqué",error))
+})
+
+morgansito.get("/:userId", (req, res)=>{ 
+    const {mail, name, location, rank, phoneNumber, description, image} = req.body
+    User.find(req.body)
+    .then((data)=>res.json(data))
     .catch((error)=>res.json(error))
 })
 
