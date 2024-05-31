@@ -21,6 +21,10 @@ app.use("/api", indexRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
+// In here we insert the user route to have access in the frontend to the collection of users from the database
+const userRoutes = require("./routes/user.routes");
+app.use("/users", userRoutes)
+
 const matchRoutes = require("./routes/match.routes");
 app.use("/matches", matchRoutes)
 
