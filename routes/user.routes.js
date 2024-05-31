@@ -15,8 +15,8 @@ morgansito.put("/:userId", (req, res)=>{
     const {userId} = req.params;
     const {name, location, phoneNumber, description, image} = req.body;
     User.findByIdAndUpdate(userId, req.body, {new: true})
-    .then((data)=>res.status(200).json("Changes were made in your profile!", data))
-    .catch((error)=>res.json("Arnaldo esto no funciona, polqué",error))
+    .then((data)=>res.status(200).json({message:"Changes were made in your profile!", data}))
+    .catch((error)=>res.json(error))
 })
 
 morgansito.get("/:userId", (req, res)=>{ 
