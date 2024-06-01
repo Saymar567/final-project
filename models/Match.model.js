@@ -4,7 +4,7 @@ const {Schema, model} = mongoose;
 const matchSchema = new Schema ({
     location: {type: mongoose.Schema.Types.ObjectId, ref: "Location", required: true},
     day: {type: String, required: true},
-    time: {type: Number, required: true},
+    time: {type: String, required: true},
     comment: {type: String, required: true},
     rival: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
     pairs: {type: Boolean, default: false}

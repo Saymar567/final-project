@@ -5,15 +5,15 @@ const Match = require("../models/Match.model");
 //We use the POST method to create a match with the properties checked in the model
 
 router.post("/", (req, res) => {
+    console.log(req.body);
     Match.create(req.body)
         .then((data) => res.status(201).json({ message: "Match has been created!", data }))
-        .catch((error) => res.status(400).json("Oh oh, there has been a problem creating the match", error))
+        .catch((error) => res.status(400).json({message: "Oh oh, there has been a problem creating the match", error: error.message}))
 })
 
 //This is to GET the information of the matches created
 
 router.get("/", (req, res) => {
-    const { matchId } = req.params;
     Match.find()
         .populate({ path: "rival", select: "name" })
         .then((data) => res.json({ data }))
