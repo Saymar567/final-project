@@ -8,7 +8,7 @@ const locationSchema = new Schema({
     rackets: {type: Boolean, default: false},
     net: {type: String},
     barService: {type: Boolean, default: false},
-    bookMatch: {type: mongoose.Schema.Types.ObjectId, ref: "User"} 
+    bookTable: {type: mongoose.Schema.Types.ObjectId, ref: "User"} 
 })
 
 const Location = model("Location", locationSchema);
