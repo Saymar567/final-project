@@ -29,4 +29,26 @@ router.put("/:eventId", (req, res)=>{
     .catch((error)=>res.json(error))
 })
 
-module.exports = router
+router.post("/signup", (req, res) => {
+    const { eventId, userId, userName } = req.body;
+    Event.findByIdAndUpdate(
+        eventId,
+        { $push: { participants: { userId, userName } } },
+        { new: true }
+    )
+        .then((data) => res.json(data))
+        .catch((error) => res.status(500).json({ error: error.message }));
+});
+
+router.post("/cancel", (req, res) => {
+    const { eventId, userId } = req.body;
+    Event.findByIdAndUpdate(
+        eventId,
+        { $pull: { participants: { userId: userId } } },
+        { new: true }
+    )
+        .then((data) => res.json(data))
+        .catch((error) => res.status(500).json({ error: error.message }));
+});
+
+module.exports = router;

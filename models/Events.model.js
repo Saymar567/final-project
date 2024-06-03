@@ -7,7 +7,12 @@ const eventSchema = new Schema ({
     location: {type: String},
     level: {type: String, default: "amateur"},
     prize: {type: String, required: function(){return this.level === "pro"}},
-    bookSeat: {type: mongoose.Schema.Types.ObjectId, ref:"User"}
+    participants: [
+        {
+            userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+            userName: String
+        }
+    ]
 })
 
 const Event = model("Event", eventSchema);
