@@ -15,7 +15,7 @@ router.post("/", (req, res) => {
 
 router.get("/", (req, res) => {
     Match.find()
-        .populate({ path: "rival", select: "name" })
+        .populate({ path: "participants", select: "name" })
         .populate({path: "location", select: "name"})
         .then((data) => res.json(data))
         .catch((error) => res.status(400).json({ message: "Error retrieving matches", error }))
@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
 
 router.put("/:matchId", (req, res) => {
     const { matchId } = req.params;
-    Match.findByIdAndUpdate(matchId, req.body, { new: true })
+    Match.findByIdAndUpdate(matchId, {$set: req.body, $push: {participants: req.body.userId}}, {new: true})
         .then((data) => res.json({ data }))
         .catch((error) => res.status(400).json({ message: "Error updating match", error }))
 })
@@ -37,6 +37,7 @@ router.get("/:matchId", (req, res) => {
     const { matchId } = req.params;
     Match.findById(matchId)
         .populate("location")
+
         .then((data) => res.json({ data }))
         .catch((error) => res.status(400).json({ message: "Oops, looks like there's no match in here", error }))
 
@@ -50,5 +51,17 @@ router.delete("/:matchId", (req, res) => {
         .then((data) => res.status(204).json({ data }))
         .catch((error) => res.status(400).json({ message: "Error deleting match", error }))
 })
+
+router.post("/signup", (req, res) => {
+    const { matchId, userId, userName } = req.body;
+    Match.findByIdAndUpdate(
+        matchId,
+        { $push: { participants: { userId, userName } } },
+        { new: true }
+    )
+        .then((data) => res.json(data))
+        .catch((error) => res.status(500).json({ error: error.message }));
+});
+
 
 module.exports = router

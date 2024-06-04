@@ -6,8 +6,12 @@ const matchSchema = new Schema ({
     day: {type: String, required: true},
     time: {type: String, required: true},
     comment: {type: String, required: true},
-    rival: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
-    pairs: {type: Boolean, default: false}
+    pairs: {type: Boolean, default: false},
+    participants: [
+        
+        {type: mongoose.Schema.Types.ObjectId, ref: "User" }
+        
+    ]
     
 });
 const Match= model("Match", matchSchema)
