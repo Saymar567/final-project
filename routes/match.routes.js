@@ -33,6 +33,15 @@ router.put("/cancel/:matchId", (req, res)=>{
 })
 
 
+router.put("/cancel/:matchId", (req, res)=>{
+    const {matchId} = req.params;
+    console.log(matchId)
+    Match.findByIdAndUpdate(matchId, {$pull: {participants: req.body.userId}}, {new: true})
+    .then((data)=> res.json(data))
+    .catch((error)=> res.json(error))
+})
+
+
 router.put("/:matchId", (req, res) => {
     const { matchId } = req.params;
     Match.findByIdAndUpdate(matchId, {$set: req.body, $push: {participants: req.body.userId}}, {new: true})
