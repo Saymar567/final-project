@@ -7,6 +7,7 @@ const matchSchema = new Schema ({
     time: {type: String, required: true},
     comment: {type: String, required: true},
     pairs: {type: Boolean, default: false},
+    createdBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
     participants: [
         
         {type: mongoose.Schema.Types.ObjectId, ref: "User" }

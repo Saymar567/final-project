@@ -16,6 +16,7 @@ router.post("/", (req, res) => {
 router.get("/", (req, res) => {
     Match.find()
         .populate({ path: "participants", select: "name" })
+        .populate({path: "createdBy", select: "name"})
         .populate({path: "location", select: "name"})
         .then((data) => res.json(data))
         .catch((error) => res.status(400).json({ message: "Error retrieving matches", error }))
@@ -30,6 +31,7 @@ router.put("/cancel/:matchId", (req, res)=>{
     .then((data)=> res.json(data))
     .catch((error)=> res.json(error))
 })
+
 
 router.put("/:matchId", (req, res) => {
     const { matchId } = req.params;
@@ -52,11 +54,21 @@ router.get("/:matchId", (req, res) => {
 
 //If we want to delete the match created, we use the DELETE method
 
-router.delete("/:matchId", (req, res) => {
-    const { matchId } = req.params;
-    Match.findByIdAndDelete(matchId)
-        .then((data) => res.status(204).json({ data }))
-        .catch((error) => res.status(400).json({ message: "Error deleting match", error }))
+router.delete("/:matchId/:userId", (req, res) => {
+    const { matchId, userId } = req.params;
+    console.log(req.body);
+    Match.findById(matchId)
+    .then((response)=> {
+        console.log("CREATED BY", response.createdBy.toString());
+        console.log("USER ID", userId);
+        if(response.createdBy.toString() !== userId) {
+            res.status(400).json({message: "You are not the one that created the match"})
+            return;
+        }
+        return Match.findByIdAndDelete(matchId)
+    })
+    .then((deletedMatch)=> res.status(200).json(deletedMatch))
+    .catch((error)=> res.json(error))
 })
 
 
