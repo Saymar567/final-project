@@ -12,7 +12,8 @@ const locationSchema = new Schema({
     horarios: [{
         horaInicio: { type: String },
         horaFin: { type: String },
-        reserved: { type: Boolean, default: false }
+        reserved: { type: Boolean, default: false },
+        reservedby: {type: String, default: ""}
     }]
 });
 
