@@ -23,6 +23,13 @@ router.get("/", (req, res) => {
 })
 
 //If we want to change some information of the match, we use the PUT method
+router.put("/cancel/:matchId", (req, res)=>{
+    const {matchId} = req.params;
+    console.log(matchId)
+    Match.findByIdAndUpdate(matchId, {$pull: {participants: req.body.userId}}, {new: true})
+    .then((data)=> res.json(data))
+    .catch((error)=> res.json(error))
+})
 
 router.put("/:matchId", (req, res) => {
     const { matchId } = req.params;
@@ -51,6 +58,7 @@ router.delete("/:matchId", (req, res) => {
         .then((data) => res.status(204).json({ data }))
         .catch((error) => res.status(400).json({ message: "Error deleting match", error }))
 })
+
 
 router.post("/signup", (req, res) => {
     const { matchId, userId, userName } = req.body;
