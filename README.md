@@ -7,8 +7,9 @@ Welcome to the backstage of De-Ping-A-Pong application.
 ##Table of contents
 
 - Technologies
-- Knowledgments
-- License
+- Routes
+- Creators
+- Acknowledgments
 
 ##Technologies
 - MongoDB
@@ -32,6 +33,8 @@ Both Mongoose and Express help to connect the back-end with the front-end.
 We have used Bcrypt and Salt to encrypt the passwords, and JWT to get the tokens to store them and give access to the app functionalities to those who are logged-in.
 
 We have used routes that allow to perform the CRUD (create, read, update, delete) method.
+
+##Routes
 
 For users:
 - Sign-up: router.post("/signup", (req, res, next) => {
@@ -199,15 +202,15 @@ router.post("/signup", (req, res) => {
         .catch((error) => res.status(500).json({ error: error.message }));
 });
 
-###Creators:
+##Creators:
 Arnaldo Mera Rojas
 Miguel Ángel Jiménez Calcedo
 
-###Acknowledgments:
+##Acknowledgments:
 Marcel Bosch Espín (mentor)
 Álvaro Sarría Rico (coworker-friend)
 Lee Kiowa Roy Fiala Grau (coworker-friend)
-Carlos Mera Rojas (UX/UI department)
+
 
 
  
