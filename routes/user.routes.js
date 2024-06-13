@@ -2,7 +2,7 @@ const express = require("express");
 const morgansito = express.Router();
 const User = require("../models/User.model")
 
-morgansito.get("/", (req, res)=>{ //We deconstruct the body not to display the password
+morgansito.get("/", (req, res)=>{ 
     User.find(req.body)
     .select('-password')
     .then((data)=>{
@@ -10,7 +10,6 @@ morgansito.get("/", (req, res)=>{ //We deconstruct the body not to display the p
     .catch((error)=>res.json(error))
 })
 
-//To make changes in the user information
 
 morgansito.put("/:userId", (req, res)=>{
     const {userId} = req.params;
@@ -33,9 +32,9 @@ morgansito.get("/:userId", (req, res)=>{
     .catch((error)=>res.json(error))
 })
 
-//To delete the user (it's a pitty)
 
-morgansito.delete("/:userId", (req, res)=>{ //doubt: to delete a user do we have to display in here the password? it would be a breach in the security, ask Marcel
+
+morgansito.delete("/:userId", (req, res)=>{ 
     const {userId} = req.params;
     const {name, location, phoneNumber, description, image} = req.body;
     User.findByIdAndDelete(userId, req.body)
