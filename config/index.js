@@ -24,7 +24,7 @@ module.exports = (app) => {
   // controls a very specific header to pass headers from the frontend
   app.use(
     cors({
-      origin: "*", //with asterisco we allow any page to access to our url
+      origin: FRONTEND_URL
     })
   );
 
