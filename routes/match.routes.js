@@ -3,14 +3,12 @@ const router = express.Router();
 const Match = require("../models/Match.model");
 
 
-
 router.post("/", (req, res) => {
     
     Match.create(req.body)
         .then((data) => res.status(201).json({ message: "Match has been created!", data }))
         .catch((error) => res.status(400).json({message: "Oh oh, there has been a problem creating the match", error: error.message}))
 })
-
 
 
 router.get("/", (req, res) => {
@@ -33,8 +31,6 @@ router.put("/cancel/:matchId", (req, res)=>{
 })
 
 
-
-
 router.put("/:matchId", (req, res) => {
     const { matchId } = req.params;
     Match.findByIdAndUpdate(matchId, {$set: req.body, $push: {participants: req.body.userId}}, {new: true})
@@ -42,7 +38,6 @@ router.put("/:matchId", (req, res) => {
         .catch((error) => res.status(400).json({ message: "Error updating match", error }))
 })
 
-//If we want to get information from a single match, wit the GET method
 
 router.get("/:matchId", (req, res) => {
     const { matchId } = req.params;
@@ -54,7 +49,6 @@ router.get("/:matchId", (req, res) => {
 
 })
 
-//If we want to delete the match created, we use the DELETE method
 
 router.delete("/:matchId/:userId", (req, res) => {
     const { matchId, userId } = req.params;

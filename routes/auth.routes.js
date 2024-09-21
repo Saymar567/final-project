@@ -1,25 +1,16 @@
 const express = require("express");
 const router = express.Router();
-
 const bcrypt = require("bcrypt");
-
-
 const jwt = require("jsonwebtoken");
-
-
 const User = require("../models/User.model");
-
-
 const { isAuthenticated } = require("../middleware/jwt.middleware.js");
 
 
 const saltRounds = 10;
 
-
 router.post("/signup", (req, res, next) => {
   const { email, password, name, location, image } = req.body;
 
-  
   if (email === "" || password === "" || name === "" || location === "" || image === "") {
     res.status(400).json({ message: "Provide email, password, name, location, and image, please" });
     return;
